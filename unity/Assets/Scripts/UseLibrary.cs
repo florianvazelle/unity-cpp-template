@@ -12,10 +12,10 @@ public class UseLibrary : MonoBehaviour
 {
     void Start()
     {
-        int random = TestCSharpLibrary.LoadLibrary.GetRandom();
+        int random = LoadLibrary.GetRandom();
         Debug.Log(random);
 
-        // TestCSharpLibrary.LoadLibrary.write();
+        // LoadLibrary.Write();
         // ReadFile("test.txt");
 
         PreAllocTest(); // work
@@ -28,7 +28,7 @@ public class UseLibrary : MonoBehaviour
         IntPtr pManagedArray = Marshal.AllocHGlobal(3 * 5 * sizeof(double));
 
         // Call test()
-        TestCSharpLibrary.LoadLibrary.pre_alloc_test(pManagedArray);
+        LoadLibrary.PreAllocTest(pManagedArray);
         
         // Read IntPtr
         double[] managedArray = new double[size];
@@ -49,7 +49,7 @@ public class UseLibrary : MonoBehaviour
         IntPtr pUnmanagedArray = IntPtr.Zero;
 
         // Call test()
-        int size = TestCSharpLibrary.LoadLibrary.alloc_in_test(pUnmanagedArray);
+        int size = LoadLibrary.AllocInTest(pUnmanagedArray);
         
          // Read IntPtr
         double[] managedArray = new double[size];
@@ -61,7 +61,7 @@ public class UseLibrary : MonoBehaviour
         }
 
         // Free the unmanaged memory
-        TestCSharpLibrary.LoadLibrary.my_free(pUnmanagedArray);
+        LoadLibrary.MyFree(pUnmanagedArray);
         pUnmanagedArray = IntPtr.Zero;
     }
 

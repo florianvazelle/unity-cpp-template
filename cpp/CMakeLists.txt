@@ -8,9 +8,12 @@ set(PROJECT_CXX_STANDARD 11)
 
 # ---- Add source files ----
 file(GLOB_RECURSE PROJECT_SOURCES "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE PROJECT_HEADERS "${CMAKE_SOURCE_DIR}/include/*.hpp")
+
+include_directories("${CMAKE_SOURCE_DIR}/include")
 
 # ---- Create shared library ----
-add_library(${LIBRARY_NAME} SHARED ${PROJECT_SOURCES})
+add_library(${LIBRARY_NAME} SHARED ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
 # ---- Create Entry Point ----
 set_target_properties(

@@ -1,4 +1,6 @@
-#include <math.h>
+#include <Library.hpp>
+
+#include <cmath>
 #include <algorithm>
 #include <cstring>
 #include <iostream>
@@ -9,15 +11,9 @@
 #include <iostream>
 
 extern "C" {
-    #ifdef WIN32
-    __declspec(dllimport)
-    #endif
-    int GetRandom() { return rand(); };
+    DLLEXPORT int GetRandom() { return rand(); };
 
-    #ifdef WIN32
-    __declspec(dllimport)
-    #endif
-    int pre_alloc_test(double* ppdoubleArrayReceiver) {
+    DLLEXPORT int PreAllocTest(double* ppdoubleArrayReceiver) {
         size_t stSize = sizeof(double) * (3 * 5);
         double doubleArray[3][5];
         
@@ -32,10 +28,7 @@ extern "C" {
         return 0;
     }
 
-    #ifdef WIN32
-    __declspec(dllimport)
-    #endif
-    int alloc_in_test(double* ppdoubleArrayReceiver) {
+    DLLEXPORT int AllocInTest(double* ppdoubleArrayReceiver) {
         size_t stSize = sizeof(double) * (3 * 5);
         double doubleArray[3][5];
         
@@ -51,15 +44,9 @@ extern "C" {
         return 3 * 5;
     }
 
-    #ifdef WIN32
-    __declspec(dllimport)
-    #endif
-    void my_free(double* ppdoubleArrayReceiver) { delete[] ppdoubleArrayReceiver; }
+    DLLEXPORT void MyFree(double* ppdoubleArrayReceiver) { delete[] ppdoubleArrayReceiver; }
 
-    #ifdef WIN32
-    __declspec(dllimport)
-    #endif
-    void write() {
+    DLLEXPORT void write() {
         std::ofstream outfile("test.txt");
         outfile << "my text here!" << std::endl;
         outfile.close();
